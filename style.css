@@ -11,12 +11,17 @@ hr {
 }
 #header-font {
   font-size: 25px;
+  display: flex;
+  align-items: center;
 }
 header {
   background-image: url(images/bg\ img.png);
-  margin-top: -21px;
+  margin-top: -25px;
   background-size: 100%;
-  padding: 40px 0 20px 40px;
+  padding-top: 25px;
+  font-size: 1em;
+  padding-left: 30px;
+  height: 100px;
   background-repeat: no-repeat;
   letter-spacing: 1px;
   line-height: 5px;

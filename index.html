@@ -84,9 +84,14 @@
     </div>
     <div class="checkout" id="checkbox">
       <h1>Enter card details</h1>
-      <input type="text" placeholder="Enter your name" id="name-inp" />
-      <input type="number" placeholder="Enter card number" id="card-num-inp" />
-      <input type="number" placeholder="Enter CVV" id="cvv-inp" />
+      <input type="text" placeholder="Enter your name" id="name-inp" required />
+      <input
+        type="number"
+        placeholder="Enter card number"
+        id="card-num-inp"
+        required
+      />
+      <input type="number" placeholder="Enter CVV" id="cvv-inp" required />
       <button id="paymentmethod">Pay</button>
     </div>
     <div class="ordercompleted" id="ordercompleted">
