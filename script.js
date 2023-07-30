@@ -3,58 +3,74 @@ const openYourOrder2 = document.getElementById("add-btn-part-2");
 const openYourOrder3 = document.getElementById("add-btn-part-3");
 const yourOrder = document.getElementById("cart");
 const yourTotalPrice = document.getElementById("total-price");
-let yourFoodOrderName = document.getElementById("food-name-order");
+const yourFoodOrderName = document.getElementById("food-name-order");
 const paymentdetail = document.getElementById("checkbox");
 const completeOrder = document.getElementById("complete-order");
 const orderCompleted = document.getElementById("ordercompleted");
-
 const payMaony = document.getElementById("paymentmethod");
-let yourFoodOrderPrice = document.getElementById("food-price-order");
-let food1name = "pizza";
-let food1price = 14;
-let food2name = "Humburger";
-let food2price = 12;
-let food3name = "Beer";
-let food3price = 12;
-let totalprice = 0;
+const yourFoodOrderPrice = document.getElementById("food-price-order");
+
+const foods = [
+  {
+    id: "Pizza",
+    description: "pepperoni, mushroom, mozzarella",
+    price: 14,
+  },
+  {
+    id: "Hamburger",
+    description: "beef, cheese, lettuce",
+    price: 12,
+  },
+  {
+    id: "Beer",
+    description: "grain, hops, yeast, water",
+    price: 12,
+  },
+];
+
+let selectedItems = [];
+
 openYourOrder1.addEventListener("click", function () {
-  yourOrder.style.display = "block";
-  orderCompleted.style.display = "none";
-  const pizzaName = document.createElement("p");
-  pizzaName.textContent = "Pizza";
-  const pizzaPrice = document.createElement("p");
-  pizzaPrice.textContent = "$" + 14;
-  yourFoodOrderName.appendChild(pizzaName);
-  yourFoodOrderPrice.appendChild(pizzaPrice);
+  displayFoodItem(0);
 });
+
 openYourOrder2.addEventListener("click", function () {
-  yourOrder.style.display = "block";
-  orderCompleted.style.display = "none";
-  const burgerName = document.createElement("p");
-  burgerName.textContent = "Humburger";
-  const burgerPrice = document.createElement("p");
-  burgerPrice.textContent = "$" + 12;
-  yourFoodOrderName.appendChild(burgerName);
-  yourFoodOrderPrice.appendChild(burgerPrice);
+  displayFoodItem(1);
 });
+
 openYourOrder3.addEventListener("click", function () {
+  displayFoodItem(2);
+});
+
+function displayFoodItem(index) {
   yourOrder.style.display = "block";
   orderCompleted.style.display = "none";
-  const beerName = document.createElement("p");
-  beerName.textContent = "Beer";
-  const beerPrice = document.createElement("p");
-  beerPrice.textContent = "$" + 12;
-  yourFoodOrderName.appendChild(beerName);
-  yourFoodOrderPrice.appendChild(beerPrice);
-});
+  const foodName = document.createElement("p");
+  foodName.textContent = foods[index].id;
+  const foodPrice = document.createElement("p");
+  foodPrice.textContent = "$" + foods[index].price;
+  yourFoodOrderName.appendChild(foodName);
+  yourFoodOrderPrice.appendChild(foodPrice);
+
+  selectedItems.push(foods[index]); // Add the selected item to the array of selected items
+
+  let totalOrderPrice = 0;
+  for (let i = 0; i < selectedItems.length; i++) {
+    totalOrderPrice += selectedItems[i].price;
+  }
+
+  yourTotalPrice.textContent = "$" + totalOrderPrice;
+}
+
 completeOrder.addEventListener("click", function () {
   paymentdetail.style.display = "block";
 });
+
 payMaony.addEventListener("click", function () {
   paymentdetail.style.display = "none";
   yourOrder.style.display = "none";
   orderCompleted.style.display = "block";
   yourFoodOrderName.textContent = null;
   yourFoodOrderPrice.textContent = null;
+  selectedItems = []; // Clear the selected items array when completing the order
 });
-yourTotalPrice.textContent = "$" + totalprice;
