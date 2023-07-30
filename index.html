@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Order Food</title>
+  </head>
+  <body>
+    <header>
+      <p id="header-font">Jimmy's Diner</p>
+      <p>The best burgers and pizzas in town.</p>
+    </header>
+    <main>
+      <div class="part-1">
+        <div class="left-side">
+          <div class="pizza-img">
+            <img src="images/pizza.png" alt="" />
+          </div>
+          <div>
+            <p id="food-name">Pizza</p>
+            <p id="food-detail">pepperoni, mushrom, mozarella</p>
+            <p id="food-price">$14</p>
+          </div>
+        </div>
+        <div class="add-btn">
+          <button id="add-btn-part-1">
+            <img src="images/add.png" alt="" />
+          </button>
+        </div>
+      </div>
+
+      <hr />
+      <div class="part-2">
+        <div class="left-side">
+          <div class="pizza-img">
+            <img src="images/burger.png" alt="" />
+          </div>
+          <div>
+            <p id="food-name">Hamburger</p>
+            <p id="food-detail">beef, cheese, lettuce</p>
+            <p id="food-price">$12</p>
+          </div>
+        </div>
+        <div class="add-btn">
+          <button id="add-btn-part-2">
+            <img src="images/add.png" alt="" />
+          </button>
+        </div>
+      </div>
+      <hr />
+
+      <div class="part-3">
+        <div class="left-side">
+          <div class="pizza-img">
+            <img src="images/beer.png" alt="" />
+          </div>
+          <div>
+            <p id="food-name">Beer</p>
+            <p id="food-detail">grain, hops, yeast, water</p>
+            <p id="food-price">$12</p>
+          </div>
+        </div>
+        <div class="add-btn">
+          <button id="add-btn-part-3">
+            <img src="images/add.png" alt="" />
+          </button>
+        </div>
+      </div>
+      <hr />
+    </main>
+    <div class="cart" id="cart">
+      <p id="your-order">Your Order</p>
+      <div class="name-price-order">
+        <p id="food-name-order"></p>
+        <p id="food-price-order"></p>
+      </div>
+      <hr id="order-hr" />
+      <div class="bottom-total-price">
+        <p>Total price:</p>
+        <p id="total-price"></p>
+      </div>
+      <button id="complete-order">Complete order</button>
+    </div>
+    <div class="checkout" id="checkbox">
+      <h1>Enter card details</h1>
+      <input type="text" placeholder="Enter your name" id="name-inp" />
+      <input type="number" placeholder="Enter card number" id="card-num-inp" />
+      <input type="number" placeholder="Enter CVV" id="cvv-inp" />
+      <button id="paymentmethod">Pay</button>
+    </div>
+    <div class="ordercompleted" id="ordercompleted">
+      <h1>Thanks, James! Your order is on its way!</h1>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
