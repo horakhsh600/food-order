@@ -71,7 +71,7 @@
     </main>
     <div class="cart" id="cart">
       <p id="your-order">Your Order</p>
-      <div class="name-price-order">
+      <div class="name-price-order" id="name-price-order">
         <p id="food-name-order"></p>
         <p id="food-price-order"></p>
       </div>
@@ -83,19 +83,30 @@
       <button id="complete-order">Complete order</button>
     </div>
     <div class="checkout" id="checkbox">
-      <h1>Enter card details</h1>
-      <input type="text" placeholder="Enter your name" id="name-inp" required />
-      <input
-        type="number"
-        placeholder="Enter card number"
-        id="card-num-inp"
-        required
-      />
-      <input type="number" placeholder="Enter CVV" id="cvv-inp" required />
-      <button id="paymentmethod">Pay</button>
+      <form action="" id="my-form">
+        <h1>Enter card details</h1>
+        <input
+          type="text"
+          placeholder="Enter your name"
+          id="name-inp"
+          required
+        />
+        <input
+          type="number"
+          placeholder="Enter card number"
+          id="card-num-inp"
+          required
+        />
+        <input type="number" placeholder="Enter CVV" id="cvv-inp" required />
+        <button id="paymentmethod">Pay</button>
+      </form>
     </div>
     <div class="ordercompleted" id="ordercompleted">
-      <h1>Thanks, James! Your order is on its way!</h1>
+      <h1>
+        Thanks,
+        <p id="user-name"></p>
+        order is on its way!
+      </h1>
     </div>
     <script src="script.js"></script>
   </body>
