@@ -158,7 +158,9 @@ main {
   width: 100%;
   max-height: 314px;
   height: 100%;
-  top: 100px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   margin: auto;
   justify-content: center;
   align-items: center;
@@ -167,7 +169,7 @@ main {
   padding: 20px;
   background-color: white;
   text-align: center;
-  position: fixed;
+  position: absolute;
   font-family: sans-serif;
 }
 .checkout > form > h1 {

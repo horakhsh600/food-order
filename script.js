@@ -11,7 +11,6 @@ const payMaony = document.getElementById("paymentmethod");
 const yourFoodOrderPrice = document.getElementById("food-price-order");
 const userName = document.getElementById("user-name");
 const userNameInputField = document.getElementById("name-inp");
-const errorMessage = document.getElementById("errorMessage");
 const foodsName = document.getElementById("name-price-order");
 const cardNumInp = document.getElementById("card-num-inp");
 const cardCvvInp = document.getElementById("cvv-inp");
@@ -88,28 +87,36 @@ function displayFoodItem(index) {
 
 completeOrder.addEventListener("click", function () {
   paymentdetail.style.display = "block";
-  document.body.style.display = "grid";
   document.body.style.justifyItems = "center";
 });
-payMaony.addEventListener("submit", function () {
-  orderCompleted.style.display = "block";
-  userName.textContent = userNameInputField.value;
-});
-payMaony.addEventListener("submit", function (event) {
-  if ((!userNameInputField.value, !cardNumInp.value, !cardCvvInp.value)) {
-    event.preventDefault();
+payMaony.addEventListener("click", function (event) {
+  event.preventDefault();
+
+  const nameInputValue = userNameInputField.value.trim();
+  const cardNumInputValue = cardNumInp.value.trim();
+  const cvvInputValue = cardCvvInp.value.trim();
+
+  if (nameInputValue === "") {
     userNameInputField.style.border = "2px solid red";
-    cardNumInp.style.border = "2px solid red";
-    cardCvvInp.style.border = "2px solid red";
-  } else {
-    userNameInputField.style.border = "1px solid #bfbfbfdc";
-    cardNumInp.style.border = "1px solid #bfbfbfdc";
-    cardCvvInp.style.border = "1px solid #bfbfbfdc";
-    paymentdetail.style.display = "none";
-    yourOrder.style.display = "none";
-    document.body.style.display = null;
-    yourFoodOrderName.textContent = null;
-    yourFoodOrderPrice.textContent = null;
-    selectedItems = [];
+    return;
   }
+
+  if (cardNumInputValue === "") {
+    cardNumInp.style.border = "2px solid red";
+    return;
+  }
+
+  if (cvvInputValue === "") {
+    cardCvvInp.style.border = "2px solid red";
+    return;
+  }
+
+  paymentdetail.style.display = "none";
+  yourOrder.style.display = "none";
+  orderCompleted.style.display = "block";
+  document.body.style.display = null;
+  yourFoodOrderName.textContent = null;
+  yourFoodOrderPrice.textContent = null;
+  selectedItems = "";
+  userName.textContent = "Thanks, " + nameInputValue + " Your order completed";
 });
