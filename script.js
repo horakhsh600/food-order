@@ -78,10 +78,22 @@ function displayFoodItem(index) {
 
   yourTotalPrice.textContent = "$" + totalOrderPrice;
   removeItem.addEventListener("click", function () {
-    selectedItems = [];
-    yourFoodOrderName.textContent = "";
-    yourFoodOrderPrice.textContent = "";
-    yourTotalPrice.textContent = "$0";
+    selectedItems.splice(index, 1);
+
+    yourFoodOrderName.removeChild(foodName);
+    yourFoodOrderPrice.removeChild(foodPrice);
+    yourFoodOrderName.removeChild(removeItem);
+
+    let totalOrderPrice = 0;
+    for (let i = 0; i < selectedItems.length; i++) {
+      totalOrderPrice += selectedItems[i].price;
+    }
+
+    yourTotalPrice.textContent = "$" + totalOrderPrice;
+
+    if (selectedItems.length === 0) {
+      yourTotalPrice.textContent = "$0";
+    }
   });
 }
 
@@ -118,5 +130,5 @@ payMaony.addEventListener("click", function (event) {
   yourFoodOrderName.textContent = null;
   yourFoodOrderPrice.textContent = null;
   selectedItems = "";
-  userName.textContent = "Thanks, " + nameInputValue + " Your order completed";
+  userName.textContent = "Thanks, " + nameInputValue + "! Your order completed";
 });
