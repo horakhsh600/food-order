@@ -11,24 +11,26 @@ const payMaony = document.getElementById("paymentmethod");
 const yourFoodOrderPrice = document.getElementById("food-price-order");
 const userName = document.getElementById("user-name");
 const userNameInputField = document.getElementById("name-inp");
-const foodsName = document.getElementById("name-price-order");
 const cardNumInp = document.getElementById("card-num-inp");
 const cardCvvInp = document.getElementById("cvv-inp");
 const foods = [
   {
-    id: "Pizza",
+    id: 1,
+    name: "Pizza",
     description: "pepperoni, mushroom, mozzarella",
     price: 14,
     delete: "remove",
   },
   {
-    id: "Hamburger",
+    id: 2,
+    name: "Hamburger",
     description: "beef, cheese, lettuce",
     price: 12,
     delete: "remove",
   },
   {
-    id: "Beer",
+    id: 3,
+    name: "Beer",
     description: "grain, hops, yeast, water",
     price: 12,
     delete: "remove",
@@ -48,9 +50,11 @@ openYourOrder2.addEventListener("click", function () {
 openYourOrder3.addEventListener("click", function () {
   displayFoodItem(2);
 });
+
 function displayFoodItem(index) {
   yourOrder.style.display = "block";
   orderCompleted.style.display = "none";
+
   const foodName = document.createElement("p");
   const removeItem = document.createElement("a");
   removeItem.style.textDecoration = "none";
@@ -62,7 +66,7 @@ function displayFoodItem(index) {
   removeItem.style.display = "block";
   removeItem.textContent = foods[index].delete;
 
-  foodName.textContent = foods[index].id;
+  foodName.textContent = foods[index].name;
   const foodPrice = document.createElement("p");
   foodPrice.textContent = "$" + foods[index].price;
   yourFoodOrderName.appendChild(foodName);
@@ -77,30 +81,57 @@ function displayFoodItem(index) {
   }
 
   yourTotalPrice.textContent = "$" + totalOrderPrice;
+
   removeItem.addEventListener("click", function () {
-    selectedItems.splice(index, 1);
-
-    yourFoodOrderName.removeChild(foodName);
-    yourFoodOrderPrice.removeChild(foodPrice);
-    yourFoodOrderName.removeChild(removeItem);
-
-    let totalOrderPrice = 0;
-    for (let i = 0; i < selectedItems.length; i++) {
-      totalOrderPrice += selectedItems[i].price;
-    }
-
-    yourTotalPrice.textContent = "$" + totalOrderPrice;
-
-    if (selectedItems.length === 0) {
-      yourTotalPrice.textContent = "$0";
-    }
+    const foodIdToDelete = parseInt(this.getAttribute("data-id"));
+    selectedItems = selectedItems.filter((food) => food.id !== foodIdToDelete);
+    updateOrderDisplay();
   });
+}
+
+function updateOrderDisplay() {
+  yourFoodOrderName.innerHTML = "";
+  yourFoodOrderPrice.innerHTML = "";
+
+  let totalOrderPrice = 0;
+  for (let i = 0; i < selectedItems.length; i++) {
+    const foodName = document.createElement("p");
+    const removeItem = document.createElement("a");
+    removeItem.style.textDecoration = "none";
+    removeItem.style.color = "gray";
+    removeItem.style.fontSize = "13px";
+    removeItem.style.cursor = "pointer";
+    removeItem.style.marginTop = "-32.5px";
+    removeItem.style.marginLeft = "60.5px";
+    removeItem.style.display = "block";
+    removeItem.textContent = "remove";
+
+    foodName.textContent = selectedItems[i].name;
+    const foodPrice = document.createElement("p");
+    foodPrice.textContent = "$" + selectedItems[i].price;
+
+    yourFoodOrderName.appendChild(foodName);
+    yourFoodOrderPrice.appendChild(foodPrice);
+    yourFoodOrderName.appendChild(removeItem);
+
+    totalOrderPrice += selectedItems[i].price;
+
+    removeItem.addEventListener("click", function () {
+      selectedItems = selectedItems.filter(
+        (food) => food.id !== selectedItems[i].id
+      );
+      updateOrderDisplay();
+    });
+  }
+
+  yourTotalPrice.textContent = "$" + totalOrderPrice;
 }
 
 completeOrder.addEventListener("click", function () {
   paymentdetail.style.display = "block";
   document.body.style.justifyItems = "center";
 });
+
 payMaony.addEventListener("click", function (event) {
   event.preventDefault();
 
@@ -127,8 +158,7 @@ payMaony.addEventListener("click", function (event) {
   yourOrder.style.display = "none";
   orderCompleted.style.display = "block";
   document.body.style.display = null;
-  yourFoodOrderName.textContent = null;
-  yourFoodOrderPrice.textContent = null;
-  selectedItems = "";
-  userName.textContent = "Thanks, " + nameInputValue + "! Your order completed";
+  updateOrderDisplay();
+  userName.textContent =
+    "Thanks, " + nameInputValue + "! Your order is completed";
 });
